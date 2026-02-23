@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LuxeBook - Premium Appointment Booking</title>
+    
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">✨ LUXEBOOK</div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#booking">Book Now</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <div style="display: flex; gap: 1rem;">
+                <button class="book-btn" id="headerBookBtn">Book Now</button>
+                <button class="admin-toggle" id="adminToggleBtn">Admin Panel</button>
+            </div>
+        </div>
+    </header>
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Your Time is Precious</h1>
+            <p>Book your appointments seamlessly. No calls, no confusion, just convenience.</p>
+            <button class="cta-btn" id="heroBookBtn">Start Booking Now</button>
+        </div>
+    </section>
+    <section class="services" id="services">
+        <h2 class="section-title">Our Premium Services</h2>
+        <div class="services-grid" id="servicesGrid">
+        </div>
+    </section>
+    <section class="booking-section" id="booking">
+        <div class="booking-container">
+            <h2 class="section-title">Book Your Appointment</h2>
+            <form class="booking-form" id="bookingForm">
+                <div class="success-message" id="successMsg">
+                    ✓ Form submitted successfully! Check confirmation modal.
+                </div>
+                <div class="form-group">
+                    <label for="selectedService">Select Service</label>
+                    <select id="selectedService" required>
+                        <option value="">Choose a service...</option>
+                    </select>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="fullName">Full Name</label>
+                        <input type="text" id="fullName" placeholder="John Doe" required>
+                        <div class="error-message" id="nameError">Please enter a valid name</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" placeholder="john@example.com" required>
+                        <div class="error-message" id="emailError">Please enter a valid email</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" placeholder="+1 (555) 123-4567" required>
+                    <div class="error-message" id="phoneError">Please enter a valid phone number</div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="appointmentDate">Select Date</label>
+                        <input type="date" id="appointmentDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Select Time</label>
+                        <div class="availability-slots" id="timeSlots">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="notes">Additional Notes (Optional)</label>
+                    <input type="text" id="notes" placeholder="Any special requests?">
+                </div>
+                <button type="submit" class="submit-btn">Complete Booking</button>
+            </form>
+        </div>
+    </section>
+    <footer id="contact">
+        <div class="footer-content">
+            <h3 style="margin-bottom: 1rem;">LuxeBook - Premium Appointment Scheduling</h3>
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Contact Us</a>
+                <a href="#">Support</a>
+            </div>
+            <p>&copy; 2024 LuxeBook. All rights reserved. | Designed with ❤️</p>
+        </div>
+    </footer>
+    <div class="modal" id="confirmationModal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeModal('confirmationModal')">&times;</button>
+            <div class="confirmation-content">
+                <div class="confirmation-icon">✅</div>
+                <h2>Booking Confirmed!</h2>
+                <p style="color: #7f8c8d; margin-bottom: 1.5rem;">Your appointment has been successfully scheduled.</p>
+                <div class="confirmation-details">
+                    <div class="detail-row">
+                        <span class="detail-label">Name:</span>
+                        <span class="detail-value" id="confirmName">-</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Service:</span>
+                        <span class="detail-value" id="confirmService">-</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Date:</span>
+                        <span class="detail-value" id="confirmDate">-</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Time:</span>
+                        <span class="detail-value" id="confirmTime">-</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Email:</span>
+                        <span class="detail-value" id="confirmEmail">-</span>
+                    </div>
+                </div>
+                <p style="color: #7f8c8d; font-size: 14px;">A confirmation email has been sent to your inbox.</p>
+            </div>
+        </div>
+    </div>
+    <div class="admin-panel" id="adminPanel">
+        <div class="admin-header">
+            <h2>Admin Dashboard</h2>
+            <button class="admin-close" id="adminCloseBtn">&times;</button>
+        </div>
+        <div class="admin-content">
+            <div class="admin-stats">
+                <div class="stat-box">
+                    <div class="stat-number" id="totalBookings">0</div>
+                    <div class="stat-label">Total Bookings</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number" id="confirmedBookings">0</div>
+                    <div class="stat-label">Confirmed</div>
+                </div>
+            </div>
+            <h3 style="margin-bottom: 1rem; color: var(--primary); font-weight: 700;">Recent Bookings</h3>
+            <div id="adminBookingsList">
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
